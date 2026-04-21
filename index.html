@@ -6,38 +6,102 @@
     <title>99% | Ecossistema de Idiomas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="min-h-screen bg-[#F5F1E8]" style="font-family: 'Inter', sans-serif;">
 
-    <nav class="glass-nav">
-        <div class="logo">99%</div>
-        <div class="nav-links">
-            <a href="#trilhas">Módulos</a>
-            <a href="#ia">IA de Pronúncia</a>
-            <a href="#tiktok">Produtividade</a>
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-4xl font-bold text-[#2C2416]" style="font-family: 'Playfair Display', serif;">
+                99%
+            </div>
+            <div class="flex gap-10 text-[#2C2416] text-sm font-medium tracking-wide">
+                <a href="#modulos" class="hover:text-[#C9A961] transition-colors">Módulos</a>
+                <a href="#ia" class="hover:text-[#C9A961] transition-colors">IA de Pronúncia</a>
+                <a href="https://www.tiktok.com/@rosamaia_ananda?_r=1&_t=ZS-95j9MFgLBVx" target="_blank" rel="noopener noreferrer" class="hover:text-[#C9A961] transition-colors">Produtividade</a>
+            </div>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="glass-card hero-content">
-            <h1>Nós somos o que faltava.</h1>
-            <p>O Ecossistema de Idiomas que te completa. Reunindo os melhores ativos de aprendizado em um só lugar.</p>
-            <p class="highlight-text">Simples funciona. 15 minutos por dia.</p>
-            <a href="#trilhas" class="btn">Começar Trilha</a>
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-40 pb-32">
+        <div class="absolute inset-0 bg-cover bg-center transform scale-105" style="background-image: url('./leopard.jpg'); background-attachment: scroll;">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/80"></div>
         </div>
-    </header>
 
-    <section id="trilhas" class="trilhas-section">
-        <h2 class="section-title">Suas Trilhas</h2>
-        <div id="idiomas-container" class="grid-container"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-8 mt-16">
+            <div class="px-24 py-20 text-center shadow-2xl rounded-3xl bg-white/10 backdrop-blur-md border border-white/20">
+                <div class="mb-10">
+                    <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold drop-shadow-sm">ecossistema de idiomas</p>
+                </div>
+                <h1 class="text-8xl md:text-9xl mb-10 text-[#F5F1E8] leading-[1.05] tracking-tight drop-shadow-sm" style="font-family: 'Playfair Display', serif; font-weight: 600;">
+                    Nós somos o<br />que faltava.
+                </h1>
+                <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto mb-10"></div>
+                <p class="text-2xl md:text-3xl mb-4 text-[#F5F1E8] font-medium tracking-wide leading-relaxed">
+                    O simples funciona.
+                </p>
+                <p class="text-xl mb-14 text-[#D1C6AD] font-light tracking-wide">
+                    15 minutos por dia
+                </p>
+                <button class="group relative bg-[#2C2416] text-[#F5F1E8] px-20 py-6 text-sm font-medium tracking-[0.25em] uppercase transition-all duration-500 rounded-full overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#C9A961] to-[#8B7355] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <span class="relative z-10 group-hover:text-[#1a1410] transition-colors duration-300">Começar Trilha</span>
+                    <div class="absolute inset-0 rounded-full ring-2 ring-[#C9A961] opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"></div>
+                </button>
+            </div>
+        </div>
     </section>
 
-    <footer>
-        <p>DESIGN BY 99% ECOSSISTEMA</p>
-    </footer>
+    <section id="modulos" class="relative py-40 px-8 bg-gradient-to-b from-white via-[#FAFAF8] to-white">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-24">
+                <p class="text-xs tracking-[0.35em] text-[#8B7355] uppercase mb-6 font-medium">suas jornadas</p>
+                <h2 class="text-7xl text-[#1a1410] mb-6" style="font-family: 'Playfair Display', serif; font-weight: 500;">Trilhas</h2>
+                <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto"></div>
+            </div>
 
-    <script src="script.js"></script>
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">한국어</h3>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="text-2xl mb-4 text-[#2C2416] tracking-wide" style="font-family: 'Playfair Display', serif;">Coreano</h4>
+                        <div class="space-y-2 text-[#5C4D3D] text-sm font-light">
+                            <p>Do básico ao avançado. Construa fluência com método científico.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">Italiano</h3>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="text-2xl mb-4 text-[#2C2416] tracking-wide" style="font-family: 'Playfair Display', serif;">Italiano</h4>
+                        <div class="space-y-2 text-[#5C4D3D] text-sm font-light">
+                            <p>Fale como um nativo. Mergulhe na cultura italiana autêntica.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#2C2416] py-12 px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="text-5xl font-bold text-[#F5F1E8] mb-8" style="font-family: 'Playfair Display', serif;">99%</div>
+            <p class="text-[#8B7355] text-xs tracking-[0.3em] uppercase font-light">Design by 99% Ecossistema</p>
+        </div>
+    </footer>
 </body>
 </html>
