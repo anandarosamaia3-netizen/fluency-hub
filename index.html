@@ -62,8 +62,9 @@
                 <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <div class="group cursor-pointer">
+            <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                
+                <div class="group cursor-pointer lang-card" data-lang="ko-kr">
                     <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
                         <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
@@ -79,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="group cursor-pointer">
+                <div class="group cursor-pointer lang-card" data-lang="it-it">
                     <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -93,6 +94,66 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="group cursor-pointer lang-card" data-lang="en-us">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">English</h3>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="text-2xl mb-4 text-[#2C2416] tracking-wide" style="font-family: 'Playfair Display', serif;">Inglês</h4>
+                        <div class="space-y-2 text-[#5C4D3D] text-sm font-light">
+                            <p>Domine o inglês global. Comunicação profissional e cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="ia" class="relative py-40 px-8 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#2C2416] via-[#1a1410] to-[#2C2416]">
+            <div class="absolute inset-0 opacity-25 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto">
+            <div class="text-center mb-24">
+                <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-6 font-semibold">tecnologia avançada</p>
+                <h2 class="text-7xl text-[#F5F1E8] mb-6" style="font-family: 'Playfair Display', serif; font-weight: 500;">IA de Pronúncia</h2>
+                <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl p-14 border border-[#E5DCC8]/50 shadow-2xl" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;">
+                    <div class="flex items-start gap-6 mb-8">
+                        <div class="w-16 h-16 bg-[#2C2416] rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-[#C9A961]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-[#8B7355] font-light mb-3 text-sm tracking-wide">Leia em voz alta:</p>
+                            <p class="text-3xl text-[#2C2416] leading-relaxed" style="font-family: 'Playfair Display', serif;">"Buongiorno, come stai?"</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-[#E5DCC8] pt-8 mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-[#5C4D3D] font-light">Precisão da pronúncia</span>
+                            <span class="text-sm text-[#C9A961]">92%</span>
+                        </div>
+                        <div class="w-full bg-[#E5DCC8] h-2 rounded-full overflow-hidden">
+                            <div class="bg-[#C9A961] h-full" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                    <button class="group relative w-full bg-[#2C2416] text-[#F5F1E8] py-5 text-sm font-medium tracking-[0.25em] uppercase transition-all duration-500 rounded-full overflow-hidden shadow-lg hover:shadow-xl hover:scale-105">
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#C9A961] to-[#8B7355] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <span class="relative z-10 group-hover:text-[#1a1410] transition-colors duration-300">Começar Análise</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -103,5 +164,17 @@
             <p class="text-[#8B7355] text-xs tracking-[0.3em] uppercase font-light">Design by 99% Ecossistema</p>
         </div>
     </footer>
+
+    <div id="curso-modal" class="hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-[#FAFAF8] w-full max-w-2xl rounded-3xl p-10 relative max-h-[85vh] overflow-y-auto shadow-2xl">
+            <button id="fechar-modal" class="absolute top-6 right-6 text-[#2C2416] hover:text-[#C9A961] transition">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modal-conteudo"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
