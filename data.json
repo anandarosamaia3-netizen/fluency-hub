@@ -1,0 +1,154 @@
+{
+  "platform": "Fluency Hub MVP",
+  "version": "1.0.0",
+  "languages": [
+    {
+      "id": "ko-kr",
+      "name": "Coreano",
+      "target_audience": "pt-br",
+      "main_challenges": ["Alfabeto Hangul", "Estrutura SOV", "Honoríficos"],
+      "modules": {
+        "base_lessons": [
+          {
+            "id": "ko_base_01",
+            "title": "Talk To Me In Korean (TTMIK)",
+            "url": "https://talktomeinkorean.com/",
+            "format": "Áudio/Texto",
+            "duration": "15 min",
+            "description": "Currículo em áudio focado em blocos curtos de gramática."
+          },
+          {
+            "id": "ko_base_02",
+            "title": "How To Study Korean",
+            "url": "https://www.howtostudykorean.com/",
+            "format": "Texto",
+            "duration": "Variável",
+            "description": "Excelente para aprofundamento e consultas gramaticais pesadas."
+          },
+          {
+            "id": "ko_base_03",
+            "title": "Canal Coreano Online",
+            "url": "https://www.youtube.com/c/CoreanoOnline",
+            "format": "Vídeo",
+            "duration": "10-20 min",
+            "description": "Explicação inicial em português para a estrutura de frases."
+          }
+        ],
+        "spaced_repetition": [
+          {
+            "id": "ko_flash_01",
+            "title": "Evita's Korean Vocabulary",
+            "url": "https://quizlet.com/search?query=evita-korean",
+            "format": "Flashcards",
+            "duration": "10 min",
+            "description": "Decks populares importados do Anki com as palavras mais usadas."
+          }
+        ],
+        "immersion": [
+          {
+            "id": "ko_immer_01",
+            "title": "Learn Korean with BTS",
+            "url": "https://weverse.io/",
+            "format": "Vídeo",
+            "duration": "15 min",
+            "description": "Expressões reais ensinadas através de conteúdos do grupo."
+          },
+          {
+            "id": "ko_immer_02",
+            "title": "Viki (Rakuten) - Learn Mode",
+            "url": "https://www.viki.com/",
+            "format": "Vídeo/Legendas",
+            "duration": "45 min",
+            "description": "K-Dramas com legendas duplas interativas."
+          }
+        ],
+        "reading_practice": [
+          {
+            "id": "ko_read_01",
+            "title": "Naver Webtoon",
+            "url": "https://comic.naver.com/",
+            "format": "Quadrinhos",
+            "duration": "10 min",
+            "description": "Leitura casual, gírias e onomatopeias do dia a dia."
+          }
+        ]
+      }
+    },
+    {
+      "id": "it-it",
+      "name": "Italiano",
+      "target_audience": "pt-br",
+      "main_challenges": ["Falsos Cognatos", "Plural sem 'S'", "Consoantes Duplas"],
+      "modules": {
+        "base_lessons": [
+          {
+            "id": "it_base_01",
+            "title": "Canal Vou Aprender Italiano",
+            "url": "https://www.youtube.com/c/VouAprenderItaliano",
+            "format": "Vídeo",
+            "duration": "15 min",
+            "description": "Foco na didática para brasileiros (erros comuns)."
+          },
+          {
+            "id": "it_base_02",
+            "title": "Coffee Break Italian",
+            "url": "https://radiolingua.com/coffeebreakitalian/",
+            "format": "Podcast",
+            "duration": "15-20 min",
+            "description": "Lições em áudio estruturadas do zero ao avançado."
+          }
+        ],
+        "spaced_repetition": [
+          {
+            "id": "it_flash_01",
+            "title": "Falsi Amici & Verbi Irregolari",
+            "url": "https://quizlet.com/search?query=falsi-amici-italiano-portoghese",
+            "format": "Flashcards",
+            "duration": "10 min",
+            "description": "Treino para desprogramar vícios do português."
+          }
+        ],
+        "immersion": [
+          {
+            "id": "it_immer_01",
+            "title": "RaiPlay",
+            "url": "https://www.raiplay.it/",
+            "format": "Streaming",
+            "duration": "Variável",
+            "description": "TV pública italiana, excelente para o sotaque padrão."
+          },
+          {
+            "id": "it_immer_02",
+            "title": "Podcast Italiano",
+            "url": "https://podcastitaliano.com/",
+            "format": "Podcast",
+            "duration": "15 min",
+            "description": "Episódios narrativos divididos por níveis (Principiante a Avançado)."
+          }
+        ],
+        "reading_practice": [
+          {
+            "id": "it_read_01",
+            "title": "Il Post",
+            "url": "https://www.ilpost.it/",
+            "format": "Texto Jornalístico",
+            "duration": "5 min",
+            "description": "Notícias com linguagem clara e moderna para treino de leitura em voz alta."
+          }
+        ]
+      }
+    }
+  ],
+  "system_tools": {
+    "speech_recognition": {
+      "name": "Web Speech API",
+      "documentation": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API",
+      "purpose": "Ouvir o usuário ler o texto e transcrever para validação no MVP inicial (gratuito e nativo no navegador)."
+    },
+    "text_generation": {
+      "name": "OpenAI API (GPT-4o-mini)",
+      "documentation": "https://platform.openai.com/docs/",
+      "purpose": "Gerar textos diários de 3 parágrafos baseados no nível do usuário e fornecer o feedback de pronúncia."
+    }
+  }
+}
