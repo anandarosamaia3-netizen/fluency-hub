@@ -8,14 +8,114 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        const database = {
+            "platform": "Fluency Hub MVP",
+            "version": "1.0.0",
+            "languages": [
+                {
+                    "id": "ko-kr",
+                    "name": "Coreano",
+                    "main_challenges": ["Alfabeto Hangul", "Estrutura SOV", "Honoríficos"],
+                    "modules": {
+                        "base_lessons": [
+                            { "title": "Talk To Me In Korean (TTMIK)", "url": "https://talktomeinkorean.com/", "description": "Currículo em áudio focado em blocos curtos." },
+                            { "title": "Coreano Online (YouTube)", "url": "https://www.youtube.com/c/CoreanoOnline", "description": "Explicação inicial em português." }
+                        ],
+                        "spaced_repetition": [
+                            { "title": "Decks do Quizlet", "url": "https://quizlet.com/search?query=korean", "description": "Flashcards para vocabulário diário." }
+                        ],
+                        "immersion": [
+                            { "title": "Learn Korean with BTS", "url": "https://weverse.io/", "description": "Expressões reais através de conteúdo K-pop." }
+                        ]
+                    }
+                },
+                {
+                    "id": "it-it",
+                    "name": "Italiano",
+                    "main_challenges": ["Falsos Cognatos", "Plural sem 'S'", "Consoantes Duplas"],
+                    "modules": {
+                        "base_lessons": [
+                            { "title": "Vou Aprender Italiano", "url": "https://www.youtube.com/c/VouAprenderItaliano", "description": "Didática focada nos erros de brasileiros." },
+                            { "title": "Coffee Break Italian", "url": "https://radiolingua.com/coffeebreakitalian/", "description": "Podcast estruturado do zero ao avançado." }
+                        ],
+                        "spaced_repetition": [
+                            { "title": "Falsi Amici", "url": "https://quizlet.com/search?query=falsi-amici-italiano-portoghese", "description": "Treino para desprogramar vícios do PT-BR." }
+                        ],
+                        "immersion": [
+                            { "title": "RaiPlay Streaming", "url": "https://www.raiplay.it/", "description": "TV pública italiana para sotaque padrão." }
+                        ]
+                    }
+                },
+                {
+                    "id": "en-us",
+                    "name": "Inglês",
+                    "main_challenges": ["Phrasal Verbs", "Pronúncia de Vogais", "Listening Rápido"],
+                    "modules": {
+                        "base_lessons": [
+                            { "title": "ABC Fluent (Linha Cronológica)", "url": "https://www.youtube.com/", "description": "Aula estruturada do básico ao avançado." }
+                        ],
+                        "spaced_repetition": [
+                            { "title": "Quizlet Pós-Aula", "url": "https://quizlet.com/", "description": "Flashcards com testes baseados na aula da professora." }
+                        ],
+                        "immersion": [
+                            { "title": "Podcasts Duolingo", "url": "https://podcast.duolingo.com/", "description": "Histórias reais para treinar listening." },
+                            { "title": "Séries e Spotify", "url": "https://spotify.com", "description": "Contextos e diálogos do dia a dia." }
+                        ]
+                    }
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.lang-card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const langId = card.getAttribute('data-lang');
+                    abrirModal(langId);
+                });
+            });
+
+            document.getElementById('fechar-modal').addEventListener('click', () => {
+                document.getElementById('curso-modal').classList.add('hidden');
+            });
+        });
+
+        function abrirModal(langId) {
+            const idioma = database.languages.find(l => l.id === langId);
+            if (!idioma) return;
+
+            const modal = document.getElementById('curso-modal');
+            const conteudo = document.getElementById('modal-conteudo');
+
+            let html = `
+                <h2 class="text-5xl mb-2 text-[#2C2416]" style="font-family: 'Playfair Display', serif;">${idioma.name}</h2>
+                <p class="text-[#8B7355] mb-8 font-light">Principais desafios: ${idioma.main_challenges.join(', ')}</p>
+            `;
+
+            html += `<h3 class="text-xl text-[#C9A961] font-semibold mb-4 uppercase tracking-widest">Aulas Base</h3><div class="space-y-4 mb-8">`;
+            idioma.modules.base_lessons.forEach(aula => {
+                html += `<a href="${aula.url}" target="_blank" class="block p-4 rounded-xl border border-[#E5DCC8] hover:border-[#C9A961] hover:bg-[#F5F1E8] transition"><h4 class="text-[#2C2416] font-medium text-lg">${aula.title}</h4><p class="text-sm text-[#5C4D3D] font-light">${aula.description}</p></a>`;
+            });
+            html += `</div>`;
+
+            html += `<h3 class="text-xl text-[#C9A961] font-semibold mb-4 uppercase tracking-widest">Imersão & Prática</h3><div class="space-y-4">`;
+            idioma.modules.immersion.concat(idioma.modules.spaced_repetition).forEach(item => {
+                html += `<a href="${item.url}" target="_blank" class="block p-4 rounded-xl border border-[#E5DCC8] hover:border-[#C9A961] hover:bg-[#F5F1E8] transition"><h4 class="text-[#2C2416] font-medium text-lg">${item.title}</h4><p class="text-sm text-[#5C4D3D] font-light">${item.description}</p></a>`;
+            });
+            html += `</div>`;
+
+            conteudo.innerHTML = html;
+            modal.classList.remove('hidden');
+        }
+    </script>
 </head>
 <body class="min-h-screen bg-[#F5F1E8]" style="font-family: 'Inter', sans-serif;">
 
     <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-white/95 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-4xl font-bold text-[#2C2416]" style="font-family: 'Playfair Display', serif;">
-                99%
-            </div>
+            <div class="text-4xl font-bold text-[#2C2416]" style="font-family: 'Playfair Display', serif;">99%</div>
             <div class="flex gap-10 text-[#2C2416] text-sm font-medium tracking-wide">
                 <a href="#modulos" class="hover:text-[#C9A961] transition-colors">Módulos</a>
                 <a href="#ia" class="hover:text-[#C9A961] transition-colors">IA de Pronúncia</a>
@@ -31,19 +131,11 @@
 
         <div class="relative z-10 max-w-5xl mx-auto px-8 mt-16">
             <div class="px-24 py-20 text-center shadow-2xl rounded-3xl bg-white/10 backdrop-blur-md border border-white/20">
-                <div class="mb-10">
-                    <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold drop-shadow-sm">ecossistema de idiomas</p>
-                </div>
-                <h1 class="text-8xl md:text-9xl mb-10 text-[#F5F1E8] leading-[1.05] tracking-tight drop-shadow-sm" style="font-family: 'Playfair Display', serif; font-weight: 600;">
-                    Nós somos o<br />que faltava.
-                </h1>
+                <div class="mb-10"><p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold drop-shadow-sm">ecossistema de idiomas</p></div>
+                <h1 class="text-8xl md:text-9xl mb-10 text-[#F5F1E8] leading-[1.05] tracking-tight drop-shadow-sm" style="font-family: 'Playfair Display', serif; font-weight: 600;">Nós somos o<br />que faltava.</h1>
                 <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto mb-10"></div>
-                <p class="text-2xl md:text-3xl mb-4 text-[#F5F1E8] font-medium tracking-wide leading-relaxed">
-                    O simples funciona.
-                </p>
-                <p class="text-xl mb-14 text-[#D1C6AD] font-light tracking-wide">
-                    15 minutos por dia
-                </p>
+                <p class="text-2xl md:text-3xl mb-4 text-[#F5F1E8] font-medium tracking-wide leading-relaxed">O simples funciona.</p>
+                <p class="text-xl mb-14 text-[#D1C6AD] font-light tracking-wide">15 minutos por dia</p>
                 <button class="group relative bg-[#2C2416] text-[#F5F1E8] px-20 py-6 text-sm font-medium tracking-[0.25em] uppercase transition-all duration-500 rounded-full overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105">
                     <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
                     <div class="absolute inset-0 bg-gradient-to-r from-[#C9A961] to-[#8B7355] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -83,6 +175,7 @@
                 <div class="group cursor-pointer lang-card" data-lang="it-it">
                     <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
                             <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">Italiano</h3>
                         </div>
@@ -98,6 +191,7 @@
                 <div class="group cursor-pointer lang-card" data-lang="en-us">
                     <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
                             <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">English</h3>
                         </div>
@@ -109,7 +203,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -173,8 +266,6 @@
             <div id="modal-conteudo"></div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 
 </body>
 </html>
