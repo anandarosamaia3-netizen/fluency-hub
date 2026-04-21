@@ -1,33 +1,57 @@
-// Aguarda o HTML carregar completamente
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // Busca o arquivo JSON
-    fetch('./data.json')
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById('idiomas-container');
-            
-            // Passa por cada idioma no JSON e cria um "cartão" de vidro para ele
-            data.languages.forEach(idioma => {
-                
-                // Cria o elemento HTML do cartão
-                const card = document.createElement('div');
-                card.classList.add('glass-card', 'idioma-card');
-                
-                // Preenche o cartão com os dados do JSON
-                card.innerHTML = `
-                    <h3>${idioma.name}</h3>
-                    <p><strong>Desafios:</strong> ${idioma.main_challenges.join(', ')}</p>
-                    <br>
-                    <p><strong>Aulas Base:</strong> ${idioma.modules.base_lessons.length} disponíveis</p>
-                    <p><strong>Imersão:</strong> ${idioma.modules.immersion.length} disponíveis</p>
-                `;
-                
-                // Adiciona o cartão na tela
-                container.appendChild(card);
-            });
-        })
-        .catch(error => {
-            console.error("Erro ao carregar os módulos:", error);
-        });
-});
+{
+  "platform": "Fluency Hub MVP",
+  "version": "1.0.0",
+  "languages": [
+    {
+      "id": "ko-kr",
+      "name": "Coreano",
+      "main_challenges": ["Alfabeto Hangul", "Estrutura SOV", "Honoríficos"],
+      "modules": {
+        "base_lessons": [
+          { "title": "Talk To Me In Korean (TTMIK)", "url": "https://talktomeinkorean.com/", "description": "Currículo em áudio focado em blocos curtos." },
+          { "title": "Coreano Online (YouTube)", "url": "https://www.youtube.com/c/CoreanoOnline", "description": "Explicação inicial em português." }
+        ],
+        "spaced_repetition": [
+          { "title": "Decks do Quizlet", "url": "https://quizlet.com/search?query=korean", "description": "Flashcards para vocabulário diário." }
+        ],
+        "immersion": [
+          { "title": "Learn Korean with BTS", "url": "https://weverse.io/", "description": "Expressões reais através de conteúdo K-pop." }
+        ]
+      }
+    },
+    {
+      "id": "it-it",
+      "name": "Italiano",
+      "main_challenges": ["Falsos Cognatos", "Plural sem 'S'", "Consoantes Duplas"],
+      "modules": {
+        "base_lessons": [
+          { "title": "Vou Aprender Italiano", "url": "https://www.youtube.com/c/VouAprenderItaliano", "description": "Didática focada nos erros de brasileiros." },
+          { "title": "Coffee Break Italian", "url": "https://radiolingua.com/coffeebreakitalian/", "description": "Podcast estruturado do zero ao avançado." }
+        ],
+        "spaced_repetition": [
+          { "title": "Falsi Amici", "url": "https://quizlet.com/search?query=falsi-amici-italiano-portoghese", "description": "Treino para desprogramar vícios do PT-BR." }
+        ],
+        "immersion": [
+          { "title": "RaiPlay Streaming", "url": "https://www.raiplay.it/", "description": "TV pública italiana para sotaque padrão." }
+        ]
+      }
+    },
+    {
+      "id": "en-us",
+      "name": "Inglês",
+      "main_challenges": ["Phrasal Verbs", "Pronúncia de Vogais", "Listening Rápido"],
+      "modules": {
+        "base_lessons": [
+          { "title": "ABC Fluent (Linha Cronológica)", "url": "https://www.youtube.com/", "description": "Aula estruturada do básico ao avançado." }
+        ],
+        "spaced_repetition": [
+          { "title": "Quizlet Pós-Aula", "url": "https://quizlet.com/", "description": "Flashcards com testes baseados na aula da professora." }
+        ],
+        "immersion": [
+          { "title": "Podcasts Duolingo", "url": "https://podcast.duolingo.com/", "description": "Histórias reais para treinar listening." },
+          { "title": "Séries e Spotify", "url": "https://open.spotify.com/", "description": "Contextos e diálogos do dia a dia." }
+        ]
+      }
+    }
+  ]
+}
