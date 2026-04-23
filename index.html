@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>99% | Ecossistema de Idiomas</title>
+    <title>99% | Meu Ecossistema</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -11,241 +11,162 @@
     
     <script>
         const database = {
-            "platform": "Fluency Hub MVP",
-            "version": "1.0.0",
-            "languages": [
-                {
-                    "id": "ko-kr",
-                    "name": "Coreano",
-                    "main_challenges": ["Alfabeto Hangul", "Estrutura SOV", "Honoríficos"],
-                    "modules": {
-                        "base_lessons": [
-                            { "title": "Talk To Me In Korean (TTMIK)", "url": "https://talktomeinkorean.com/", "description": "Currículo em áudio focado em blocos curtos." },
-                            { "title": "Coreano Online (YouTube)", "url": "https://www.youtube.com/c/CoreanoOnline", "description": "Explicação inicial em português." }
-                        ],
-                        "spaced_repetition": [
-                            { "title": "Decks do Quizlet", "url": "https://quizlet.com/search?query=korean", "description": "Flashcards para vocabulário diário." }
-                        ],
-                        "immersion": [
-                            { "title": "Learn Korean with BTS", "url": "https://weverse.io/", "description": "Expressões reais através de conteúdo K-pop." }
-                        ]
-                    }
-                },
-                {
-                    "id": "it-it",
-                    "name": "Italiano",
-                    "main_challenges": ["Falsos Cognatos", "Plural sem 'S'", "Consoantes Duplas"],
-                    "modules": {
-                        "base_lessons": [
-                            { "title": "Vou Aprender Italiano", "url": "https://www.youtube.com/c/VouAprenderItaliano", "description": "Didática focada nos erros de brasileiros." },
-                            { "title": "Coffee Break Italian", "url": "https://radiolingua.com/coffeebreakitalian/", "description": "Podcast estruturado do zero ao avançado." }
-                        ],
-                        "spaced_repetition": [
-                            { "title": "Falsi Amici", "url": "https://quizlet.com/search?query=falsi-amici-italiano-portoghese", "description": "Treino para desprogramar vícios do PT-BR." }
-                        ],
-                        "immersion": [
-                            { "title": "RaiPlay Streaming", "url": "https://www.raiplay.it/", "description": "TV pública italiana para sotaque padrão." }
-                        ]
-                    }
-                },
-                {
-                    "id": "en-us",
-                    "name": "Inglês",
-                    "main_challenges": ["Phrasal Verbs", "Pronúncia de Vogais", "Listening Rápido"],
-                    "modules": {
-                        "base_lessons": [
-                            { "title": "ABC Fluent (Linha Cronológica)", "url": "https://www.youtube.com/", "description": "Aula estruturada do básico ao avançado." }
-                        ],
-                        "spaced_repetition": [
-                            { "title": "Quizlet Pós-Aula", "url": "https://quizlet.com/", "description": "Flashcards com testes baseados na aula da professora." }
-                        ],
-                        "immersion": [
-                            { "title": "Podcasts Duolingo", "url": "https://podcast.duolingo.com/", "description": "Histórias reais para treinar listening." },
-                            { "title": "Séries e Spotify", "url": "https://spotify.com", "description": "Contextos e diálogos do dia a dia." }
-                        ]
-                    }
-                }
-            ]
+            "en-us": {
+                name: "Inglês",
+                description: "Foco em consistência e imersão diária.",
+                resources: [
+                    { type: "Aula Base", title: "ABC Fluent", desc: "Aulas em linha cronológica (Básico ao Fluente).", url: "https://www.youtube.com/@ABCFluent" },
+                    { type: "Revisão", title: "Quizlet", desc: "Flashcards e provinhas baseados nas aulas.", url: "https://quizlet.com/latest" },
+                    { type: "Listening", title: "Podcast Duolingo", desc: "Histórias que quebram barreiras.", url: "https://podcast.duolingo.com/english" },
+                    { type: "Imersão", title: "Séries & Spotify", desc: "Séries para contextos/diálogos e playlist diária.", url: "https://open.spotify.com/" }
+                ]
+            },
+            "ko-kr": {
+                name: "Coreano",
+                description: "Construção de vocabulário e compreensão auditiva.",
+                resources: [
+                    { type: "Aula Base", title: "Curso Kultivi", desc: "Fundamentos e gramática estruturada.", url: "https://app.kultivi.com/dashboard/course/introducao-ao-coreano" },
+                    { type: "Listening", title: "Talk To Me In Korean", desc: "Podcast para compreensão rápida.", url: "https://talktomeinkorean.com/" },
+                    { type: "Imersão", title: "BTS (Músicas)", desc: "Estudo ativo de letras e pronúncia.", url: "https://open.spotify.com/playlist/37i9dQZF1DX08mhnhv6g9b" },
+                    { type: "Imersão", title: "K-Dramas", desc: "Consumo de séries às sextas-feiras.", url: "https://www.viki.com/" }
+                ]
+            },
+            "it-it": {
+                name: "Italiano",
+                description: "Estudo focado para o fim de semana.",
+                resources: [
+                    { type: "Aula Base", title: "Curso Kultive", desc: "Aulas aos sábados para criar base no idioma.", url: "https://app.kultivi.com/dashboard/course/italiano-basico" }
+                ]
+            }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.lang-card');
+            const modal = document.getElementById('curso-modal');
+            const conteudo = document.getElementById('modal-conteudo');
+            const btnFechar = document.getElementById('fechar-modal');
+
             cards.forEach(card => {
                 card.addEventListener('click', () => {
                     const langId = card.getAttribute('data-lang');
-                    abrirModal(langId);
+                    const idioma = database[langId];
+                    
+                    if (idioma) {
+                        let html = `
+                            <h2 class="text-5xl mb-2 text-[#2C2416]" style="font-family: 'Playfair Display', serif;">${idioma.name}</h2>
+                            <p class="text-[#8B7355] mb-8 font-light">${idioma.description}</p>
+                            <div class="space-y-4">
+                        `;
+                        
+                        // Agora isso gera uma tag <a> com href para ser clicável
+                        idioma.resources.forEach(res => {
+                            html += `
+                                <a href="${res.url}" target="_blank" rel="noopener noreferrer" class="block p-5 rounded-xl border border-[#E5DCC8] bg-white hover:border-[#C9A961] transition shadow-sm group">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold tracking-widest text-[#C9A961] uppercase">${res.type}</span>
+                                        <svg class="w-4 h-4 text-[#E5DCC8] group-hover:text-[#C9A961] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </div>
+                                    <h4 class="text-[#2C2416] font-medium text-xl mb-1">${res.title}</h4>
+                                    <p class="text-sm text-[#5C4D3D] font-light">${res.desc}</p>
+                                </a>
+                            `;
+                        });
+
+                        html += `</div>`;
+                        conteudo.innerHTML = html;
+                        modal.classList.remove('hidden');
+                    }
                 });
             });
 
-            document.getElementById('fechar-modal').addEventListener('click', () => {
-                document.getElementById('curso-modal').classList.add('hidden');
+            btnFechar.addEventListener('click', () => {
+                modal.classList.add('hidden');
             });
         });
-
-        function abrirModal(langId) {
-            const idioma = database.languages.find(l => l.id === langId);
-            if (!idioma) return;
-
-            const modal = document.getElementById('curso-modal');
-            const conteudo = document.getElementById('modal-conteudo');
-
-            let html = `
-                <h2 class="text-5xl mb-2 text-[#2C2416]" style="font-family: 'Playfair Display', serif;">${idioma.name}</h2>
-                <p class="text-[#8B7355] mb-8 font-light">Principais desafios: ${idioma.main_challenges.join(', ')}</p>
-            `;
-
-            html += `<h3 class="text-xl text-[#C9A961] font-semibold mb-4 uppercase tracking-widest">Aulas Base</h3><div class="space-y-4 mb-8">`;
-            idioma.modules.base_lessons.forEach(aula => {
-                html += `<a href="${aula.url}" target="_blank" class="block p-4 rounded-xl border border-[#E5DCC8] hover:border-[#C9A961] hover:bg-[#F5F1E8] transition"><h4 class="text-[#2C2416] font-medium text-lg">${aula.title}</h4><p class="text-sm text-[#5C4D3D] font-light">${aula.description}</p></a>`;
-            });
-            html += `</div>`;
-
-            html += `<h3 class="text-xl text-[#C9A961] font-semibold mb-4 uppercase tracking-widest">Imersão & Prática</h3><div class="space-y-4">`;
-            idioma.modules.immersion.concat(idioma.modules.spaced_repetition).forEach(item => {
-                html += `<a href="${item.url}" target="_blank" class="block p-4 rounded-xl border border-[#E5DCC8] hover:border-[#C9A961] hover:bg-[#F5F1E8] transition"><h4 class="text-[#2C2416] font-medium text-lg">${item.title}</h4><p class="text-sm text-[#5C4D3D] font-light">${item.description}</p></a>`;
-            });
-            html += `</div>`;
-
-            conteudo.innerHTML = html;
-            modal.classList.remove('hidden');
-        }
     </script>
 </head>
 <body class="min-h-screen bg-[#F5F1E8]" style="font-family: 'Inter', sans-serif;">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-[#F5F1E8]/90 backdrop-blur-md border-b border-[#E5DCC8]">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-4xl font-bold text-[#2C2416]" style="font-family: 'Playfair Display', serif;">99%</div>
-            <div class="flex gap-10 text-[#2C2416] text-sm font-medium tracking-wide">
-                <a href="#modulos" class="hover:text-[#C9A961] transition-colors">Módulos</a>
-                <a href="#ia" class="hover:text-[#C9A961] transition-colors">IA de Pronúncia</a>
+            <div class="text-3xl font-bold text-[#2C2416]" style="font-family: 'Playfair Display', serif;">99%</div>
+            <div class="flex gap-8 text-[#2C2416] text-sm font-medium tracking-wide">
+                <a href="#calendario" class="hover:text-[#C9A961] transition-colors">Calendário</a>
+                <a href="#trilhas" class="hover:text-[#C9A961] transition-colors">Trilhas</a>
                 <a href="https://www.tiktok.com/@rosamaia_ananda?_r=1&_t=ZS-95j9MFgLBVx" target="_blank" rel="noopener noreferrer" class="hover:text-[#C9A961] transition-colors">Produtividade</a>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-40 pb-32">
-        <div class="absolute inset-0 bg-cover bg-center transform scale-105" style="background-image: url('./leopard.jpg'); background-attachment: scroll;">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/80"></div>
+    <section id="calendario" class="pt-40 pb-20 px-8 max-w-7xl mx-auto">
+        <div class="mb-12">
+            <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold">Visão Geral</p>
+            <h1 class="text-5xl md:text-6xl text-[#1a1410] mb-4" style="font-family: 'Playfair Display', serif;">O simples funciona.</h1>
+            <p class="text-lg text-[#5C4D3D] font-light">15 minutos por dia. Consistência vence a intensidade.</p>
         </div>
 
-        <div class="relative z-10 max-w-5xl mx-auto px-8 mt-16">
-            <div class="px-24 py-20 text-center shadow-2xl rounded-3xl bg-white/10 backdrop-blur-md border border-white/20">
-                <div class="mb-10"><p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold drop-shadow-sm">ecossistema de idiomas</p></div>
-                <h1 class="text-8xl md:text-9xl mb-10 text-[#F5F1E8] leading-[1.05] tracking-tight drop-shadow-sm" style="font-family: 'Playfair Display', serif; font-weight: 600;">Nós somos o<br />que faltava.</h1>
-                <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto mb-10"></div>
-                <p class="text-2xl md:text-3xl mb-4 text-[#F5F1E8] font-medium tracking-wide leading-relaxed">O simples funciona.</p>
-                <p class="text-xl mb-14 text-[#D1C6AD] font-light tracking-wide">15 minutos por dia</p>
-                <button class="group relative bg-[#2C2416] text-[#F5F1E8] px-20 py-6 text-sm font-medium tracking-[0.25em] uppercase transition-all duration-500 rounded-full overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105">
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-[#C9A961] to-[#8B7355] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <span class="relative z-10 group-hover:text-[#1a1410] transition-colors duration-300">Começar Trilha</span>
-                    <div class="absolute inset-0 rounded-full ring-2 ring-[#C9A961] opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"></div>
-                </button>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#E5DCC8]">
+                <h3 class="text-xl font-medium text-[#2C2416] mb-4 border-b border-[#E5DCC8] pb-2" style="font-family: 'Playfair Display', serif;">Segunda-feira</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#C9A961]"></span> Aula de Inglês</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#E5DCC8]">
+                <h3 class="text-xl font-medium text-[#2C2416] mb-4 border-b border-[#E5DCC8] pb-2" style="font-family: 'Playfair Display', serif;">Terça-feira</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#C9A961]"></span> Revisão de Inglês</li>
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#2C2416]"></span> Aula de Coreano</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#E5DCC8]">
+                <h3 class="text-xl font-medium text-[#2C2416] mb-4 border-b border-[#E5DCC8] pb-2" style="font-family: 'Playfair Display', serif;">Quarta-feira</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#C9A961] mt-2"></span> Série em Inglês (Legendas EN)</li>
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#2C2416]"></span> Revisão de Coreano</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#E5DCC8]">
+                <h3 class="text-xl font-medium text-[#2C2416] mb-4 border-b border-[#E5DCC8] pb-2" style="font-family: 'Playfair Display', serif;">Quinta-feira</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#C9A961]"></span> Podcast de Inglês</li>
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#2C2416]"></span> Música em Coreano</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#E5DCC8]">
+                <h3 class="text-xl font-medium text-[#2C2416] mb-4 border-b border-[#E5DCC8] pb-2" style="font-family: 'Playfair Display', serif;">Sexta-feira</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#2C2416]"></span> K-Drama (Coreano)</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#E5DCC8]">
+                <h3 class="text-xl font-medium text-[#2C2416] mb-4 border-b border-[#E5DCC8] pb-2" style="font-family: 'Playfair Display', serif;">Sábado</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-[#5C4D3D]"><span class="w-2 h-2 rounded-full bg-[#8B7355]"></span> Aula de Italiano</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="modulos" class="relative py-40 px-8 bg-gradient-to-b from-white via-[#FAFAF8] to-white">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-24">
-                <p class="text-xs tracking-[0.35em] text-[#8B7355] uppercase mb-6 font-medium">suas jornadas</p>
-                <h2 class="text-7xl text-[#1a1410] mb-6" style="font-family: 'Playfair Display', serif; font-weight: 500;">Trilhas</h2>
-                <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto"></div>
+    <section id="trilhas" class="py-20 px-8 bg-white border-t border-[#E5DCC8]">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12">
+                <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold">Os Ativos</p>
+                <h2 class="text-5xl text-[#1a1410]" style="font-family: 'Playfair Display', serif;">Minhas Trilhas</h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-                
-                <div class="group cursor-pointer lang-card" data-lang="ko-kr">
-                    <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">한국어</h3>
-                        </div>
-                    </div>
-                    <div class="px-2">
-                        <h4 class="text-2xl mb-4 text-[#2C2416] tracking-wide" style="font-family: 'Playfair Display', serif;">Coreano</h4>
-                        <div class="space-y-2 text-[#5C4D3D] text-sm font-light">
-                            <p>Do básico ao avançado. Construa fluência com método científico.</p>
-                        </div>
-                    </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group cursor-pointer lang-card bg-[#2C2416] rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform" data-lang="en-us">
+                    <h3 class="text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">English</h3>
+                    <p class="text-[#D1C6AD] font-light text-sm">ABC Fluent, Quizlet, Podcasts e Séries.</p>
                 </div>
-
-                <div class="group cursor-pointer lang-card" data-lang="it-it">
-                    <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">Italiano</h3>
-                        </div>
-                    </div>
-                    <div class="px-2">
-                        <h4 class="text-2xl mb-4 text-[#2C2416] tracking-wide" style="font-family: 'Playfair Display', serif;">Italiano</h4>
-                        <div class="space-y-2 text-[#5C4D3D] text-sm font-light">
-                            <p>Fale como um nativo. Mergulhe na cultura italiana autêntica.</p>
-                        </div>
-                    </div>
+                <div class="group cursor-pointer lang-card bg-[#2C2416] rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform" data-lang="ko-kr">
+                    <h3 class="text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">한국어</h3>
+                    <p class="text-[#D1C6AD] font-light text-sm">Kultivi, TTMIK, BTS e K-Dramas.</p>
                 </div>
-
-                <div class="group cursor-pointer lang-card" data-lang="en-us">
-                    <div class="relative overflow-hidden rounded-2xl mb-6 h-80 bg-[#2C2416] shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 opacity-25 bg-cover bg-center group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" style="background-image: url('./textura.png');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/30 group-hover:to-black/20 transition-all duration-500"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <h3 class="text-7xl text-[#F5F1E8] drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style="font-family: 'Playfair Display', serif;">English</h3>
-                        </div>
-                    </div>
-                    <div class="px-2">
-                        <h4 class="text-2xl mb-4 text-[#2C2416] tracking-wide" style="font-family: 'Playfair Display', serif;">Inglês</h4>
-                        <div class="space-y-2 text-[#5C4D3D] text-sm font-light">
-                            <p>Domine o inglês global. Comunicação profissional e cotidiana.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="ia" class="relative py-40 px-8 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-[#2C2416] via-[#1a1410] to-[#2C2416]">
-            <div class="absolute inset-0 opacity-25 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
-        </div>
-
-        <div class="relative z-10 max-w-6xl mx-auto">
-            <div class="text-center mb-24">
-                <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-6 font-semibold">tecnologia avançada</p>
-                <h2 class="text-7xl text-[#F5F1E8] mb-6" style="font-family: 'Playfair Display', serif; font-weight: 500;">IA de Pronúncia</h2>
-                <div class="w-32 h-[3px] bg-gradient-to-r from-transparent via-[#C9A961] to-transparent mx-auto"></div>
-            </div>
-
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-white/95 backdrop-blur-md rounded-2xl p-14 border border-[#E5DCC8]/50 shadow-2xl" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;">
-                    <div class="flex items-start gap-6 mb-8">
-                        <div class="w-16 h-16 bg-[#2C2416] rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-[#C9A961]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <p class="text-[#8B7355] font-light mb-3 text-sm tracking-wide">Leia em voz alta:</p>
-                            <p class="text-3xl text-[#2C2416] leading-relaxed" style="font-family: 'Playfair Display', serif;">"Buongiorno, come stai?"</p>
-                        </div>
-                    </div>
-                    <div class="border-t border-[#E5DCC8] pt-8 mb-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-sm text-[#5C4D3D] font-light">Precisão da pronúncia</span>
-                            <span class="text-sm text-[#C9A961]">92%</span>
-                        </div>
-                        <div class="w-full bg-[#E5DCC8] h-2 rounded-full overflow-hidden">
-                            <div class="bg-[#C9A961] h-full" style="width: 92%;"></div>
-                        </div>
-                    </div>
-                    <button class="group relative w-full bg-[#2C2416] text-[#F5F1E8] py-5 text-sm font-medium tracking-[0.25em] uppercase transition-all duration-500 rounded-full overflow-hidden shadow-lg hover:shadow-xl hover:scale-105">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-cover bg-center" style="background-image: url('./textura.png');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-r from-[#C9A961] to-[#8B7355] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <span class="relative z-10 group-hover:text-[#1a1410] transition-colors duration-300">Começar Análise</span>
-                    </button>
+                <div class="group cursor-pointer lang-card bg-[#2C2416] rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform" data-lang="it-it">
+                    <h3 class="text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">Italiano</h3>
+                    <p class="text-[#D1C6AD] font-light text-sm">Curso Kultivi (Imersão de Fim de Semana).</p>
                 </div>
             </div>
         </div>
@@ -253,15 +174,15 @@
 
     <footer class="bg-[#2C2416] py-12 px-8">
         <div class="max-w-7xl mx-auto text-center">
-            <div class="text-5xl font-bold text-[#F5F1E8] mb-8" style="font-family: 'Playfair Display', serif;">99%</div>
+            <div class="text-3xl font-bold text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">99%</div>
             <p class="text-[#8B7355] text-xs tracking-[0.3em] uppercase font-light">Design by 99% Ecossistema</p>
         </div>
     </footer>
 
-    <div id="curso-modal" class="hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#FAFAF8] w-full max-w-2xl rounded-3xl p-10 relative max-h-[85vh] overflow-y-auto shadow-2xl">
-            <button id="fechar-modal" class="absolute top-6 right-6 text-[#2C2416] hover:text-[#C9A961] transition">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="curso-modal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-[#FAFAF8] w-full max-w-2xl rounded-3xl p-10 relative max-h-[85vh] overflow-y-auto shadow-2xl border border-[#E5DCC8]">
+            <button id="fechar-modal" class="absolute top-6 right-6 text-[#2C2416] hover:text-[#C9A961] transition bg-[#E5DCC8] p-2 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div id="modal-conteudo"></div>
         </div>
