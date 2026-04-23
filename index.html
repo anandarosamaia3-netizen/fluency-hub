@@ -18,7 +18,7 @@
                     { type: "Aula Base", title: "ABC Fluent", desc: "Aulas em linha cronológica.", url: "https://www.youtube.com/@ABCFluent" },
                     { type: "Revisão", title: "Quizlet", desc: "Flashcards e provinhas pós-aula.", url: "https://quizlet.com/latest" },
                     { type: "Listening", title: "Podcast Duolingo", desc: "Histórias reais e vocabulário.", url: "https://podcast.duolingo.com/english" },
-                    { type: "Imersão", title: "Séries & Spotify", desc: "Treino de contextos e diálogos.", url: "https://open.spotify.com" }
+                    { type: "Imersão", title: "Séries & Spotify", desc: "Treino de contextos e diálogos.", url: "http://googleusercontent.com/spotify.com/4" }
                 ]
             },
             "ko-kr": {
@@ -27,7 +27,7 @@
                 resources: [
                     { type: "Aula Base", title: "Curso Kultivi", desc: "Gramática estruturada.", url: "https://app.kultivi.com/dashboard/course/introducao-ao-coreano" },
                     { type: "Listening", title: "Talk To Me In Korean", desc: "Podcast de compreensão rápida.", url: "https://talktomeinkorean.com/" },
-                    { type: "Imersão", title: "BTS (Músicas)", desc: "Estudo ativo de letras e pronúncia.", url: "https://open.spotify.com" },
+                    { type: "Imersão", title: "BTS (Músicas)", desc: "Estudo ativo de letras e pronúncia.", url: "http://googleusercontent.com/spotify.com/4" },
                     { type: "Imersão", title: "K-Dramas", desc: "Consumo de séries (Viki/Netflix).", url: "https://www.viki.com/" }
                 ]
             },
@@ -44,8 +44,16 @@
             const btn = document.getElementById('ai-btn');
             const feedbackText = document.getElementById('ai-feedback');
             const progressBar = document.getElementById('ai-progress');
-            const targetPhrase = "arirang arirang arariyo";
+            const percentText = document.getElementById('ai-percent');
             
+            // Agora pegamos o que você digitar na caixa!
+            const targetPhrase = document.getElementById('ai-input').value.toLowerCase().trim();
+            
+            if(!targetPhrase) {
+                alert("Digite uma frase para eu analisar!");
+                return;
+            }
+
             const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!Recognition) {
                 alert("Seu navegador não suporta reconhecimento de voz. Tente no Chrome.");
@@ -53,7 +61,8 @@
             }
 
             const recognizer = new Recognition();
-            recognizer.lang = 'ko-KR';
+            // Tenta detectar o idioma automaticamente ou você pode setar
+            recognizer.lang = 'en-US'; 
             
             btn.innerHTML = "Ouvindo...";
             recognizer.start();
@@ -62,14 +71,16 @@
                 const result = event.results[0][0].transcript.toLowerCase();
                 feedbackText.innerHTML = `A IA ouviu: "${result}"`;
                 
-                if (result.includes("아리랑") || result.includes("arirang")) {
+                if (result.includes(targetPhrase) || targetPhrase.includes(result)) {
                     progressBar.style.width = "100%";
-                    feedbackText.innerHTML += " - <span class='text-green-600 font-bold'>Pronúncia Perfeita!</span>";
+                    percentText.innerHTML = "100%";
+                    feedbackText.innerHTML += " - <span class='text-green-600 font-bold'>Excelente!</span>";
                 } else {
-                    progressBar.style.width = "40%";
-                    feedbackText.innerHTML += " - <span class='text-orange-500 font-bold'>Tente novamente.</span>";
+                    progressBar.style.width = "50%";
+                    percentText.innerHTML = "50%";
+                    feedbackText.innerHTML += " - <span class='text-orange-500 font-bold'>Quase lá, tente focar na dicção.</span>";
                 }
-                btn.innerHTML = "Tentar Novamente";
+                btn.innerHTML = "Analisar Novamente";
             };
         }
 
@@ -92,14 +103,13 @@
                     }
                 });
             });
-
             document.getElementById('fechar-modal').onclick = () => modal.classList.add('hidden');
         });
     </script>
 </head>
 <body class="min-h-screen bg-[#F5F1E8]">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-[#F5F1E8]/90 backdrop-blur-md border-b border-[#E5DCC8]">
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-[#F5F1E8]/95 backdrop-blur-md border-b border-[#E5DCC8]">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="text-3xl font-bold text-[#2C2416]" style="font-family: 'Playfair Display', serif;">99%</div>
             <div class="flex gap-8 text-[#2C2416] text-sm font-medium">
@@ -114,52 +124,55 @@
         <div class="mb-12">
             <p class="text-xs tracking-[0.35em] text-[#C9A961] uppercase mb-4 font-semibold">Rotina Estratégica</p>
             <h1 class="text-6xl text-[#1a1410] mb-4" style="font-family: 'Playfair Display', serif;">O simples funciona.</h1>
-            <p class="text-lg text-[#5C4D3D] font-light italic">"Nós somos o que faltava."</p>
+            <p class="text-lg text-[#5C4D3D] font-light italic">15 minutos todo dia.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white p-6 rounded-2xl border border-[#E5DCC8] shadow-sm">
                 <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Segunda: Inglês</h3>
-                <p class="text-sm text-[#5C4D3D]">Aula no Canal ABC Fluent.</p>
+                <p class="text-sm text-[#5C4D3D]">Aula Base: ABC Fluent.</p>
             </div>
             <div class="bg-white p-6 rounded-2xl border border-[#E5DCC8] shadow-sm">
-                <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Terça: Revisão + Coreano</h3>
-                <p class="text-sm text-[#5C4D3D]">Quizlet (EN) + Aula Kultivi (KO).</p>
+                <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Terça: Mix</h3>
+                <p class="text-sm text-[#5C4D3D]">Revisão EN + Aula Coreano Kultivi.</p>
             </div>
             <div class="bg-white p-6 rounded-2xl border border-[#E5DCC8] shadow-sm">
-                <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Quarta: Imersão + Revisão</h3>
-                <p class="text-sm text-[#5C4D3D]">Série (EN) + Revisão Kultivi (KO).</p>
+                <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Quarta: Imersão</h3>
+                <p class="text-sm text-[#5C4D3D]">Série EN + Revisão Coreano.</p>
             </div>
             <div class="bg-white p-6 rounded-2xl border border-[#E5DCC8] shadow-sm">
-                <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Quinta: Listening + Música</h3>
-                <p class="text-sm text-[#5C4D3D]">Podcast Duolingo + Música BTS.</p>
+                <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Quinta: Áudio</h3>
+                <p class="text-sm text-[#5C4D3D]">Podcast EN + Música BTS.</p>
             </div>
             <div class="bg-white p-6 rounded-2xl border border-[#E5DCC8] shadow-sm">
                 <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Sexta: Dorama</h3>
-                <p class="text-sm text-[#5C4D3D]">Imersão cultural em Coreano.</p>
+                <p class="text-sm text-[#5C4D3D]">Imersão cultural Coreana.</p>
             </div>
             <div class="bg-white p-6 rounded-2xl border border-[#E5DCC8] shadow-sm">
                 <h3 class="font-medium text-[#2C2416] border-b pb-2 mb-3" style="font-family: 'Playfair Display', serif;">Sábado: Italiano</h3>
-                <p class="text-sm text-[#5C4D3D]">Aula base no Curso Kultivi.</p>
+                <p class="text-sm text-[#5C4D3D]">Aula Base: Kultivi.</p>
             </div>
         </div>
     </section>
 
     <section id="trilhas" class="py-20 px-8 bg-white border-t border-[#E5DCC8]">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl text-[#1a1410] mb-12" style="font-family: 'Playfair Display', serif;">Minhas Trilhas</h2>
+            <h2 class="text-5xl text-[#1a1410] mb-12" style="font-family: 'Playfair Display', serif;">Ativos de Estudo</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="lang-card bg-[#2C2416] rounded-3xl p-8 shadow-xl cursor-pointer hover:scale-105 transition" data-lang="en-us">
-                    <h3 class="text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">English</h3>
-                    <p class="text-[#D1C6AD] text-sm font-light">ABC Fluent & Quizlet.</p>
+                <div class="lang-card relative bg-[#2C2416] rounded-3xl p-8 shadow-xl cursor-pointer hover:scale-105 transition overflow-hidden" data-lang="en-us">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('./textura.png'); background-size: cover;"></div>
+                    <h3 class="relative z-10 text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">English</h3>
+                    <p class="relative z-10 text-[#D1C6AD] text-sm font-light">ABC Fluent & Quizlet.</p>
                 </div>
-                <div class="lang-card bg-[#2C2416] rounded-3xl p-8 shadow-xl cursor-pointer hover:scale-105 transition" data-lang="ko-kr">
-                    <h3 class="text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">한국어</h3>
-                    <p class="text-[#D1C6AD] text-sm font-light">Kultivi, TTMIK & BTS.</p>
+                <div class="lang-card relative bg-[#2C2416] rounded-3xl p-8 shadow-xl cursor-pointer hover:scale-105 transition overflow-hidden" data-lang="ko-kr">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('./textura.png'); background-size: cover;"></div>
+                    <h3 class="relative z-10 text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">한국어</h3>
+                    <p class="relative z-10 text-[#D1C6AD] text-sm font-light">Kultivi, TTMIK & BTS.</p>
                 </div>
-                <div class="lang-card bg-[#2C2416] rounded-3xl p-8 shadow-xl cursor-pointer hover:scale-105 transition" data-lang="it-it">
-                    <h3 class="text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">Italiano</h3>
-                    <p class="text-[#D1C6AD] text-sm font-light">Kultivi (Base).</p>
+                <div class="lang-card relative bg-[#2C2416] rounded-3xl p-8 shadow-xl cursor-pointer hover:scale-105 transition overflow-hidden" data-lang="it-it">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('./textura.png'); background-size: cover;"></div>
+                    <h3 class="relative z-10 text-4xl text-[#F5F1E8] mb-4" style="font-family: 'Playfair Display', serif;">Italiano</h3>
+                    <p class="relative z-10 text-[#D1C6AD] text-sm font-light">Kultivi (Base).</p>
                 </div>
             </div>
         </div>
@@ -168,34 +181,36 @@
     <section id="ia" class="py-20 px-8 bg-[#F5F1E8]">
         <div class="max-w-3xl mx-auto">
             <div class="bg-white rounded-3xl p-10 border border-[#E5DCC8] shadow-2xl text-center">
-                <p class="text-xs tracking-widest text-[#C9A961] uppercase mb-4">IA de Pronúncia</p>
-                <h2 class="text-4xl mb-6 text-[#2C2416]" style="font-family: 'Playfair Display', serif;">Pratique o Refrão</h2>
-                <div class="bg-[#F5F1E8] p-6 rounded-2xl mb-8">
-                    <p class="text-2xl italic text-[#2C2416]">"Arirang, Arirang, Arariyo..."</p>
-                    <p class="text-sm text-[#8B7355] mt-2">Música: Arirang (BTS Version)</p>
+                <p class="text-xs tracking-widest text-[#C9A961] uppercase mb-4 font-semibold">Análise de Pronúncia</p>
+                <h2 class="text-4xl mb-6 text-[#2C2416]" style="font-family: 'Playfair Display', serif;">O que vamos praticar?</h2>
+                <div class="bg-[#F5F1E8] p-4 rounded-2xl mb-8">
+                    <textarea id="ai-input" class="w-full bg-transparent border-none text-center text-xl italic text-[#2C2416] focus:ring-0 resize-none" rows="2" placeholder="Digite a frase aqui... (ex: Arirang)"></textarea>
                 </div>
-                <div class="mb-8">
+                <div class="mb-8 px-10">
                     <div class="flex justify-between text-xs mb-2"><span>Precisão</span><span id="ai-percent">0%</span></div>
                     <div class="w-full bg-[#E5DCC8] h-2 rounded-full overflow-hidden"><div id="ai-progress" class="bg-[#C9A961] h-full transition-all duration-700" style="width: 0%"></div></div>
                 </div>
-                <button id="ai-btn" onclick="startVoiceAI()" class="bg-[#2C2416] text-[#F5F1E8] px-12 py-4 rounded-full uppercase tracking-widest text-sm hover:bg-[#C9A961] transition">Começar Análise</button>
-                <p id="ai-feedback" class="mt-6 text-sm text-[#5C4D3D] font-light"></p>
+                <button id="ai-btn" onclick="startVoiceAI()" class="relative bg-[#2C2416] text-[#F5F1E8] px-16 py-4 rounded-full uppercase tracking-widest text-sm hover:scale-105 transition shadow-lg overflow-hidden group">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity" style="background-image: url('./textura.png');"></div>
+                    <span class="relative z-10">Analisar Voz</span>
+                </button>
+                <p id="ai-feedback" class="mt-6 text-sm text-[#5C4D3D] font-light h-4"></p>
             </div>
         </div>
     </section>
 
+    <footer class="bg-[#2C2416] py-12 text-center">
+        <p class="text-[#8B7355] text-xs tracking-[0.3em] uppercase">Design by 99% Ecossistema</p>
+    </footer>
+
     <div id="curso-modal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#FAFAF8] w-full max-w-2xl rounded-3xl p-10 relative max-h-[85vh] overflow-y-auto shadow-2xl border border-[#E5DCC8]">
+        <div class="bg-[#FAFAF8] w-full max-w-2xl rounded-3xl p-10 relative max-h-[85vh] overflow-y-auto shadow-2xl">
             <button id="fechar-modal" class="absolute top-6 right-6 bg-[#E5DCC8] p-2 rounded-full hover:bg-[#C9A961] transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div id="modal-conteudo"></div>
         </div>
     </div>
-
-    <footer class="bg-[#2C2416] py-12 text-center">
-        <p class="text-[#8B7355] text-xs tracking-[0.3em] uppercase">Design by 99% Ecossistema</p>
-    </footer>
 
 </body>
 </html>
